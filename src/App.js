@@ -7,7 +7,7 @@ import Contact from "./components/Contact";
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  background: #0a0f1c;
   color: #ffffff;
   overflow-x: hidden;
   position: relative;
@@ -27,10 +27,8 @@ const Name = styled(motion.h1)`
   font-weight: bold;
   text-align: center;
   z-index: 1;
-  background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 `;
 
 const StarryBackground = styled.div`
@@ -39,8 +37,24 @@ const StarryBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  background: radial-gradient(circle at center, #1a1f2e 0%, #0a0f1c 100%);
   overflow: hidden;
+`;
+
+const twinkle = keyframes`
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+`;
+
+const Star = styled.div`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #ffffff;
+  animation: ${twinkle} ${(props) => props.duration || 4}s infinite;
+  opacity: 0.3;
 `;
 
 const fallingStar = keyframes`
@@ -62,29 +76,46 @@ const fallingStar = keyframes`
 
 const FallingStar = styled.div`
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: ${(props) => props.color || "#ffffff"};
+  width: 1px;
+  height: 1px;
+  background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 4px ${(props) => props.color || "#ffffff"};
+  box-shadow: 0 0 4px #ffffff;
   animation: ${fallingStar} ${(props) => props.duration || 3}s linear infinite;
   opacity: 0;
 `;
 
 function App() {
-  // Generate 200 falling stars with different colors and speeds
-  const fallingStars = Array.from({ length: 200 }, (_, i) => ({
+  // Generate 400 static stars
+  const stars = Array.from({ length: 400 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    duration: 2 + Math.random() * 4,
+  }));
+
+  // Generate 100 falling stars
+  const fallingStars = Array.from({ length: 100 }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
     animationDelay: `${Math.random() * 5}s`,
-    duration: 2 + Math.random() * 3, // Random duration between 2-5 seconds
-    color: `hsl(${Math.random() * 360}, 70%, 80%)`, // Random pastel colors
+    duration: 2 + Math.random() * 3,
   }));
 
   return (
     <AppContainer>
       <Header>
         <StarryBackground>
+          {stars.map((star) => (
+            <Star
+              key={star.id}
+              style={{
+                left: star.left,
+                top: star.top,
+                animationDuration: `${star.duration}s`,
+              }}
+            />
+          ))}
           {fallingStars.map((star) => (
             <FallingStar
               key={star.id}
@@ -93,7 +124,6 @@ function App() {
                 animationDelay: star.animationDelay,
                 animationDuration: `${star.duration}s`,
               }}
-              color={star.color}
             />
           ))}
         </StarryBackground>
