@@ -48,13 +48,63 @@ const twinkle = keyframes`
 
 const Star = styled.div`
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: ${(props) => props.size || 1}px;
+  height: ${(props) => props.size || 1}px;
   background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 4px #ffffff;
+  box-shadow: 0 0 ${(props) => props.size * 2 || 4}px #ffffff;
   animation: ${twinkle} ${(props) => props.duration || 4}s infinite;
   opacity: 0.3;
+`;
+
+const Planet = styled.div`
+  position: absolute;
+  width: ${(props) => props.size || 20}px;
+  height: ${(props) => props.size || 20}px;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 ${(props) => props.size * 2 || 40}px
+    ${(props) => props.color || "#4a90e2"};
+  background: ${(props) => {
+    switch (props.texture) {
+      case "gas":
+        return `radial-gradient(circle at 30% 30%, 
+          rgba(255, 255, 255, 0.2) 0%,
+          ${props.color} 50%,
+          rgba(0, 0, 0, 0.3) 100%)`;
+      case "rocky":
+        return `radial-gradient(circle at 30% 30%, 
+          rgba(255, 255, 255, 0.3) 0%,
+          ${props.color} 40%,
+          rgba(0, 0, 0, 0.4) 100%),
+          repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.1) 0px,
+            rgba(255, 255, 255, 0.1) 1px,
+            transparent 1px,
+            transparent 2px)`;
+      case "ice":
+        return `radial-gradient(circle at 30% 30%, 
+          rgba(255, 255, 255, 0.4) 0%,
+          ${props.color} 40%,
+          rgba(0, 0, 0, 0.3) 100%),
+          radial-gradient(circle at 70% 70%,
+            rgba(255, 255, 255, 0.2) 0%,
+            transparent 50%)`;
+      default:
+        return props.color;
+    }
+  }};
+  animation: ${(props) =>
+    props.rotation ? "rotate 20s linear infinite" : "none"};
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 const fallingStar = keyframes`
@@ -86,21 +136,71 @@ const FallingStar = styled.div`
 `;
 
 function App() {
-  // Generate 400 static stars
-  const stars = Array.from({ length: 400 }, (_, i) => ({
+  // Generate 800 static stars with varying sizes
+  const stars = Array.from({ length: 800 }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     duration: 2 + Math.random() * 4,
+    size: Math.random() * 2 + 1,
   }));
 
-  // Generate 100 falling stars
-  const fallingStars = Array.from({ length: 100 }, (_, i) => ({
+  // Generate 200 falling stars
+  const fallingStars = Array.from({ length: 200 }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
     animationDelay: `${Math.random() * 5}s`,
     duration: 2 + Math.random() * 3,
   }));
+
+  // Updated planets with textures
+  const planets = [
+    {
+      id: 1,
+      color: "#4a90e2",
+      size: 20,
+      left: "10%",
+      top: "20%",
+      texture: "gas",
+      rotation: true,
+    },
+    {
+      id: 2,
+      color: "#e24a4a",
+      size: 15,
+      left: "80%",
+      top: "30%",
+      texture: "rocky",
+      rotation: true,
+    },
+    {
+      id: 3,
+      color: "#4ae24a",
+      size: 25,
+      left: "30%",
+      top: "70%",
+      texture: "ice",
+      rotation: true,
+    },
+    {
+      id: 4,
+      color: "#e2e24a",
+      size: 18,
+      left: "70%",
+      top: "80%",
+      texture: "gas",
+      rotation: true,
+    },
+    {
+      id: 5,
+      color: "#e24ae2",
+      size: 22,
+      left: "50%",
+      top: "40%",
+      texture: "rocky",
+      rotation: true,
+    },
+  ];
 
   return (
     <AppContainer>
@@ -113,6 +213,20 @@ function App() {
                 left: star.left,
                 top: star.top,
                 animationDuration: `${star.duration}s`,
+                size: star.size,
+              }}
+            />
+          ))}
+          {planets.map((planet) => (
+            <Planet
+              key={planet.id}
+              style={{
+                left: planet.left,
+                top: planet.top,
+                color: planet.color,
+                size: planet.size,
+                texture: planet.texture,
+                rotation: planet.rotation,
               }}
             />
           ))}
