@@ -64,6 +64,62 @@ const twinkle = keyframes`
   50% { opacity: 1; }
 `;
 
+const sparkle = keyframes`
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: scale(1.5);
+    opacity: 1;
+  }
+`;
+
+const bigSparkle = keyframes`
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% { 
+    transform: scale(2) rotate(180deg);
+    opacity: 1;
+  }
+`;
+
+const fallingStar = keyframes`
+  0% {
+    transform: translateY(-100%) translateX(0) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%) translateX(100px) rotate(45deg);
+    opacity: 0;
+  }
+`;
+
+const dramaticFallingStar = keyframes`
+  0% {
+    transform: translateY(-100%) translateX(0) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%) translateX(200px) rotate(45deg);
+    opacity: 0;
+  }
+`;
+
 export const Star = styled.div`
   position: absolute;
   width: ${(props) => props.size || 1}px;
@@ -73,6 +129,28 @@ export const Star = styled.div`
   box-shadow: 0 0 ${(props) => props.size * 2 || 4}px #ffffff;
   animation: ${twinkle} ${(props) => props.duration || 4}s infinite;
   opacity: 0.3;
+`;
+
+export const Sparkle = styled.div`
+  position: absolute;
+  width: ${(props) => props.size || 2}px;
+  height: ${(props) => props.size || 2}px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 ${(props) => props.size * 3 || 6}px #ffffff;
+  animation: ${sparkle} ${(props) => props.duration || 3}s infinite;
+  opacity: 0.3;
+`;
+
+export const BigSparkle = styled.div`
+  position: absolute;
+  width: ${(props) => props.size || 4}px;
+  height: ${(props) => props.size || 4}px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 ${(props) => props.size * 4 || 16}px #ffffff;
+  animation: ${bigSparkle} ${(props) => props.duration || 5}s infinite;
+  opacity: 0.2;
 `;
 
 export const Planet = styled.div`
@@ -125,30 +203,14 @@ export const Planet = styled.div`
   }
 `;
 
-const fallingStar = keyframes`
-  0% {
-    transform: translateY(-100%) translateX(0) rotate(45deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100%) translateX(100px) rotate(45deg);
-    opacity: 0;
-  }
-`;
-
 export const FallingStar = styled.div`
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: ${(props) => props.size || 1}px;
+  height: ${(props) => props.size || 1}px;
   background: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 4px #ffffff;
-  animation: ${fallingStar} ${(props) => props.duration || 3}s linear infinite;
+  box-shadow: 0 0 ${(props) => props.size * 4 || 4}px #ffffff;
+  animation: ${(props) => (props.dramatic ? dramaticFallingStar : fallingStar)}
+    ${(props) => props.duration || 3}s linear infinite;
   opacity: 0;
 `;

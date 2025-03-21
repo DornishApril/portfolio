@@ -11,6 +11,8 @@ import {
   Planet,
   FallingStar,
   ScrollButton,
+  Sparkle,
+  BigSparkle,
 } from "./styles/AppStyles";
 
 function App() {
@@ -25,12 +27,32 @@ function App() {
     size: Math.random() * 2 + 1,
   }));
 
-  // Generate 200 falling stars
-  const fallingStars = Array.from({ length: 200 }, (_, i) => ({
+  // Generate 100 sparkles
+  const sparkles = Array.from({ length: 100 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    duration: 2 + Math.random() * 3,
+    size: Math.random() * 2 + 1,
+  }));
+
+  // Generate 50 big sparkles
+  const bigSparkles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    duration: 3 + Math.random() * 4,
+    size: Math.random() * 3 + 2,
+  }));
+
+  // Generate 300 falling stars with varying sizes and dramatic effects
+  const fallingStars = Array.from({ length: 300 }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
     animationDelay: `${Math.random() * 5}s`,
-    duration: 2 + Math.random() * 3,
+    duration: 2 + Math.random() * 4,
+    size: Math.random() * 2 + 1,
+    dramatic: Math.random() > 0.7, // 30% chance of being dramatic
   }));
 
   // Updated planets with textures
@@ -105,6 +127,28 @@ function App() {
               }}
             />
           ))}
+          {sparkles.map((sparkle) => (
+            <Sparkle
+              key={sparkle.id}
+              style={{
+                left: sparkle.left,
+                top: sparkle.top,
+                animationDuration: `${sparkle.duration}s`,
+                size: sparkle.size,
+              }}
+            />
+          ))}
+          {bigSparkles.map((sparkle) => (
+            <BigSparkle
+              key={sparkle.id}
+              style={{
+                left: sparkle.left,
+                top: sparkle.top,
+                animationDuration: `${sparkle.duration}s`,
+                size: sparkle.size,
+              }}
+            />
+          ))}
           {planets.map((planet) => (
             <Planet
               key={planet.id}
@@ -125,6 +169,8 @@ function App() {
                 left: star.left,
                 animationDelay: star.animationDelay,
                 animationDuration: `${star.duration}s`,
+                size: star.size,
+                dramatic: star.dramatic,
               }}
             />
           ))}
