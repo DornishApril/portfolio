@@ -8,7 +8,6 @@ import {
   Name,
   StarryBackground,
   Star,
-  Planet,
   FallingStar,
   ScrollButton,
   Sparkle,
@@ -55,55 +54,6 @@ function App() {
     dramatic: Math.random() > 0.7, // 30% chance of being dramatic
   }));
 
-  // Updated planets with textures
-  const planets = [
-    {
-      id: 1,
-      color: "#4a90e2",
-      size: 20,
-      left: "10%",
-      top: "20%",
-      texture: "gas",
-      rotation: true,
-    },
-    {
-      id: 2,
-      color: "#e24a4a",
-      size: 15,
-      left: "80%",
-      top: "30%",
-      texture: "rocky",
-      rotation: true,
-    },
-    {
-      id: 3,
-      color: "#4ae24a",
-      size: 25,
-      left: "30%",
-      top: "70%",
-      texture: "ice",
-      rotation: true,
-    },
-    {
-      id: 4,
-      color: "#e2e24a",
-      size: 18,
-      left: "70%",
-      top: "80%",
-      texture: "gas",
-      rotation: true,
-    },
-    {
-      id: 5,
-      color: "#e24ae2",
-      size: 22,
-      left: "50%",
-      top: "40%",
-      texture: "rocky",
-      rotation: true,
-    },
-  ];
-
   const handleScroll = () => {
     setShowContent(true);
     window.scrollTo({
@@ -146,19 +96,6 @@ function App() {
                 top: sparkle.top,
                 animationDuration: `${sparkle.duration}s`,
                 size: sparkle.size,
-              }}
-            />
-          ))}
-          {planets.map((planet) => (
-            <Planet
-              key={planet.id}
-              style={{
-                left: planet.left,
-                top: planet.top,
-                color: planet.color,
-                size: planet.size,
-                texture: planet.texture,
-                rotation: planet.rotation,
               }}
             />
           ))}

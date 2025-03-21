@@ -153,56 +153,6 @@ export const BigSparkle = styled.div`
   opacity: 0.2;
 `;
 
-export const Planet = styled.div`
-  position: absolute;
-  width: ${(props) => props.size || 20}px;
-  height: ${(props) => props.size || 20}px;
-  border-radius: 50%;
-  opacity: 0.8;
-  box-shadow: 0 0 ${(props) => props.size * 2 || 40}px
-    ${(props) => props.color || "#4a90e2"};
-  background: ${(props) => {
-    switch (props.texture) {
-      case "gas":
-        return `radial-gradient(circle at 30% 30%, 
-          rgba(255, 255, 255, 0.2) 0%,
-          ${props.color} 50%,
-          rgba(0, 0, 0, 0.3) 100%)`;
-      case "rocky":
-        return `radial-gradient(circle at 30% 30%, 
-          rgba(255, 255, 255, 0.3) 0%,
-          ${props.color} 40%,
-          rgba(0, 0, 0, 0.4) 100%),
-          repeating-linear-gradient(45deg,
-            rgba(255, 255, 255, 0.1) 0px,
-            rgba(255, 255, 255, 0.1) 1px,
-            transparent 1px,
-            transparent 2px)`;
-      case "ice":
-        return `radial-gradient(circle at 30% 30%, 
-          rgba(255, 255, 255, 0.4) 0%,
-          ${props.color} 40%,
-          rgba(0, 0, 0, 0.3) 100%),
-          radial-gradient(circle at 70% 70%,
-            rgba(255, 255, 255, 0.2) 0%,
-            transparent 50%)`;
-      default:
-        return props.color;
-    }
-  }};
-  animation: ${(props) =>
-    props.rotation ? "rotate 20s linear infinite" : "none"};
-
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-`;
-
 export const FallingStar = styled.div`
   position: absolute;
   width: ${(props) => props.size || 1}px;
