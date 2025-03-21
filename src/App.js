@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import Projects from "./components/Projects";
 import MLTutorial from "./components/MLTutorial";
@@ -7,9 +7,10 @@ import Contact from "./components/Contact";
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0a192f, #1a1a2e);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   color: #ffffff;
   overflow-x: hidden;
+  position: relative;
 `;
 
 const Header = styled(motion.header)`
@@ -26,7 +27,10 @@ const Name = styled(motion.h1)`
   font-weight: bold;
   text-align: center;
   z-index: 1;
-  color: #64ffda;
+  background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
 `;
 
 const StarryBackground = styled.div`
@@ -35,37 +39,64 @@ const StarryBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23ffffff'/%3E%3C/svg%3E");
-  opacity: 0.3;
-  animation: twinkle 4s infinite;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  overflow: hidden;
+`;
 
-  @keyframes twinkle {
-    0%,
-    100% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 0.5;
-    }
+const fallingStar = keyframes`
+  0% {
+    transform: translateY(-100%) translateX(0) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%) translateX(100px) rotate(45deg);
+    opacity: 0;
   }
 `;
 
-const Cloud = styled(motion.div)`
+const FallingStar = styled.div`
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
-  padding: 20px;
-  font-family: monospace;
-  font-size: 1.2rem;
-  color: #64ffda;
-  white-space: nowrap;
+  width: 2px;
+  height: 2px;
+  background: ${(props) => props.color || "#ffffff"};
+  border-radius: 50%;
+  box-shadow: 0 0 4px ${(props) => props.color || "#ffffff"};
+  animation: ${fallingStar} ${(props) => props.duration || 3}s linear infinite;
+  opacity: 0;
 `;
 
 function App() {
+  // Generate 200 falling stars with different colors and speeds
+  const fallingStars = Array.from({ length: 200 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    animationDelay: `${Math.random() * 5}s`,
+    duration: 2 + Math.random() * 3, // Random duration between 2-5 seconds
+    color: `hsl(${Math.random() * 360}, 70%, 80%)`, // Random pastel colors
+  }));
+
   return (
     <AppContainer>
       <Header>
-        <StarryBackground />
+        <StarryBackground>
+          {fallingStars.map((star) => (
+            <FallingStar
+              key={star.id}
+              style={{
+                left: star.left,
+                animationDelay: star.animationDelay,
+                animationDuration: `${star.duration}s`,
+              }}
+              color={star.color}
+            />
+          ))}
+        </StarryBackground>
         <Name
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,27 +104,6 @@ function App() {
         >
           DornishApril
         </Name>
-        <Cloud
-          initial={{ x: -100, y: 100 }}
-          animate={{ x: "100vw", y: 100 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          {`<code>Hello World</code>`}
-        </Cloud>
-        <Cloud
-          initial={{ x: -100, y: 200 }}
-          animate={{ x: "100vw", y: 200 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        >
-          {`function() { return true; }`}
-        </Cloud>
-        <Cloud
-          initial={{ x: -100, y: 300 }}
-          animate={{ x: "100vw", y: 300 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        >
-          {`const life = "awesome";`}
-        </Cloud>
       </Header>
       <Projects />
       <MLTutorial />
