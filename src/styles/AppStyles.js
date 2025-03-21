@@ -12,6 +12,7 @@ export const AppContainer = styled.div`
 export const Header = styled(motion.header)`
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -25,16 +26,37 @@ export const Name = styled(motion.h1)`
   z-index: 1;
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
+`;
+
+export const ScrollButton = styled(motion.button)`
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
 `;
 
 export const StarryBackground = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: radial-gradient(circle at center, #1a1f2e 0%, #0a0f1c 100%);
   overflow: hidden;
+  z-index: 0;
 `;
 
 const twinkle = keyframes`

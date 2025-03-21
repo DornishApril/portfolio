@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Projects from "./components/Projects";
 import MLTutorial from "./components/MLTutorial";
 import Contact from "./components/Contact";
@@ -10,9 +10,12 @@ import {
   Star,
   Planet,
   FallingStar,
+  ScrollButton,
 } from "./styles/AppStyles";
 
 function App() {
+  const [showContent, setShowContent] = useState(false);
+
   // Generate 800 static stars with varying sizes
   const stars = Array.from({ length: 800 }, (_, i) => ({
     id: i,
@@ -79,6 +82,14 @@ function App() {
     },
   ];
 
+  const handleScroll = () => {
+    setShowContent(true);
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <AppContainer>
       <Header>
@@ -125,10 +136,22 @@ function App() {
         >
           DornishApril
         </Name>
+        <ScrollButton
+          onClick={handleScroll}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          Explore My Universe
+        </ScrollButton>
       </Header>
-      <Projects />
-      <MLTutorial />
-      <Contact />
+      {showContent && (
+        <>
+          <Projects />
+          <MLTutorial />
+          <Contact />
+        </>
+      )}
     </AppContainer>
   );
 }

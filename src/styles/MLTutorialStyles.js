@@ -3,14 +3,12 @@ import { motion } from "framer-motion";
 
 export const TutorialSection = styled.section`
   padding: 100px 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 15, 28, 0.95) 0%,
-    rgba(26, 31, 46, 0.95) 100%
-  );
-  backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 1;
 
   &::before {
     content: "";
@@ -21,7 +19,7 @@ export const TutorialSection = styled.section`
     bottom: 0;
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.03) 0%,
       transparent 50%
     );
     pointer-events: none;

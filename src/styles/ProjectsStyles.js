@@ -5,7 +5,10 @@ export const ProjectsSection = styled.section`
   padding: 100px 20px;
   position: relative;
   overflow: hidden;
-  background: transparent;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 1;
 
   &::before {
     content: "";
@@ -16,7 +19,7 @@ export const ProjectsSection = styled.section`
     bottom: 0;
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(0, 0, 139, 0.03) 0%, /* Dark blue tone */
+      rgba(255, 255, 255, 0.03) 0%,
       transparent 50%
     );
     pointer-events: none;
@@ -52,8 +55,8 @@ export const ProjectCard = styled(motion.div)`
     bottom: 0;
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(0, 0, 139, 0.2) 0%, /* Dark blue tone */
-      transparent 70%
+      rgba(0, 0, 139, 0.2) 0%,
+      /* Dark blue tone */ transparent 70%
     );
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -72,7 +75,7 @@ export const ProjectCard = styled(motion.div)`
 `;
 
 export const ProjectTitle = styled.h2`
-  color: #4682B4; /* Steel blue */
+  color: #4682b4; /* Steel blue */
   margin-bottom: 15px;
   font-size: 1.5rem;
   text-shadow: 0 0 10px rgba(70, 130, 180, 0.3);
@@ -81,7 +84,7 @@ export const ProjectTitle = styled.h2`
 `;
 
 export const ProjectDescription = styled.p`
-  color: #B0C4DE; /* Light steel blue */
+  color: #b0c4de; /* Light steel blue */
   line-height: 1.6;
   margin-bottom: 20px;
   position: relative;
@@ -99,7 +102,7 @@ export const TechStack = styled.div`
 
 export const TechTag = styled.span`
   background: rgba(70, 130, 180, 0.1); /* Steel blue */
-  color: #4682B4; /* Steel blue */
+  color: #4682b4; /* Steel blue */
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 0.9rem;
