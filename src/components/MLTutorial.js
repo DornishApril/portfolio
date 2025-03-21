@@ -147,7 +147,7 @@ const MLTutorial = () => {
   return (
     <TutorialSection>
       <TutorialContainer>
-        <SectionTitle>Machine Learning Tutorial</SectionTitle>
+        <SectionTitle>Learn AI With Samir! ~</SectionTitle>
         <GifGrid>
           {gifs.map((gif, index) => (
             <GifCard

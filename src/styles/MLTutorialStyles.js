@@ -9,59 +9,49 @@ export const TutorialSection = styled.section`
   display: flex;
   align-items: center;
   z-index: 1;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, 0.03) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
-  }
 `;
 
 export const TutorialContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 `;
 
 export const SectionTitle = styled.h2`
-  color: #64ffda;
+  color: #4a90e2;
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+  font-size: 3rem;
+  margin-bottom: 70px;
+  text-shadow: 0 0 15px rgba(74, 144, 226, 0.4);
   position: relative;
   z-index: 1;
 `;
 
 export const GifGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
-  margin-top: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 60px;
+  margin-top: 60px;
   position: relative;
   z-index: 1;
 `;
 
 export const GifCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 15px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 10, 20, 0.8);
+  border-radius: 25px;
+  padding: 40px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(0, 191, 255, 0.15);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
   &::before {
     content: "";
@@ -72,45 +62,60 @@ export const GifCard = styled(motion.div)`
     bottom: 0;
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(100, 255, 218, 0.05) 0%,
+      rgba(0, 191, 255, 0.15) 0%,
       transparent 70%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(0, 191, 255, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: transform 0.6s ease;
   }
 
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.15);
-    border-color: rgba(100, 255, 218, 0.2);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 191, 255, 0.25);
+    border-color: rgba(0, 191, 255, 0.5);
+    background: rgba(5, 10, 20, 0.9);
 
     &::before {
       opacity: 1;
+    }
+
+    &::after {
+      transform: rotate(45deg) translate(50%, 50%);
     }
   }
 `;
 
 export const GifImage = styled.img`
   width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 1;
+  transition: transform 0.4s ease;
+
+  ${GifCard}:hover & {
+    transform: scale(1.05);
+  }
 `;
 
 export const GifTitle = styled.h3`
-  color: #64ffda;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
-  position: relative;
-  z-index: 1;
-`;
-
-export const GifDescription = styled.p`
-  color: #94a3b8;
-  line-height: 1.6;
-  position: relative;
-  z-index: 1;
-`;

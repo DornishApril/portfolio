@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const ProjectsSection = styled.section`
-  padding: 100px 20px;
+  padding: 120px 20px;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -26,25 +26,47 @@ export const ProjectsSection = styled.section`
   }
 `;
 
+export const SectionTitle = styled.h2`
+  color: #00bfff;
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 80px;
+  text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+  position: relative;
+  z-index: 1;
+`;
+
 export const ProjectsContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+`;
+
+export const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 60px;
+  margin-top: 60px;
   position: relative;
   z-index: 1;
 `;
 
 export const ProjectCard = styled(motion.div)`
-  background: rgba(0, 0, 139, 0.1); /* Dark blue tone */
-  border-radius: 15px;
-  padding: 30px;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(0, 0, 139, 0.2); /* Dark blue tone */
-  transition: all 0.3s ease;
+  background: rgba(5, 10, 20, 0.8);
+  border-radius: 25px;
+  padding: 40px;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(0, 191, 255, 0.15);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
   &::before {
     content: "";
@@ -55,40 +77,88 @@ export const ProjectCard = styled(motion.div)`
     bottom: 0;
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(0, 0, 139, 0.2) 0%,
-      /* Dark blue tone */ transparent 70%
+      rgba(0, 191, 255, 0.15) 0%,
+      transparent 70%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(0, 191, 255, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: transform 0.6s ease;
   }
 
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 139, 0.3); /* Dark blue tone */
-    border-color: rgba(0, 0, 139, 0.4); /* Dark blue tone */
-    background: rgba(0, 0, 139, 0.15); /* Dark blue tone */
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 191, 255, 0.25);
+    border-color: rgba(0, 191, 255, 0.5);
+    background: rgba(5, 10, 20, 0.9);
 
     &::before {
       opacity: 1;
     }
+
+    &::after {
+      transform: rotate(45deg) translate(50%, 50%);
+    }
   }
 `;
 
-export const ProjectTitle = styled.h2`
-  color: #4682b4; /* Steel blue */
-  margin-bottom: 15px;
-  font-size: 1.5rem;
-  text-shadow: 0 0 10px rgba(70, 130, 180, 0.3);
+export const ProjectImage = styled.img`
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 1;
+  transition: transform 0.4s ease;
+
+  ${ProjectCard}:hover & {
+    transform: scale(1.05);
+  }
+`;
+
+export const ProjectTitle = styled.h3`
+  color: #00bfff;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  text-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+
+  ${ProjectCard}:hover & {
+    transform: translateY(-5px);
+  }
 `;
 
 export const ProjectDescription = styled.p`
-  color: #b0c4de; /* Light steel blue */
-  line-height: 1.6;
-  margin-bottom: 20px;
+  color: #e0f7ff;
+  line-height: 1.9;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
   position: relative;
   z-index: 1;
+  transition: color 0.3s ease;
+
+  ${ProjectCard}:hover & {
+    color: #ffffff;
+  }
 `;
 
 export const TechStack = styled.div`
