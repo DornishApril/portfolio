@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/portfolio/static/css/main.66483a8e.css",
+    "main.js": "/portfolio/static/js/main.1692c285.js",
+    "static/media/img_fitting.gif": "/portfolio/static/media/img_fitting.3944225f7ddd50a75f00.gif",
+    "static/media/neural_network_curve_fitting.gif": "/portfolio/static/media/neural_network_curve_fitting.b73c521dccfc56d4a230.gif",
+    "static/media/linear_regression.gif": "/portfolio/static/media/linear_regression.4f0f151cee55de13490d.gif",
+    "index.html": "/portfolio/index.html",
+    "main.66483a8e.css.map": "/portfolio/static/css/main.66483a8e.css.map",
+    "main.1692c285.js.map": "/portfolio/static/js/main.1692c285.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66483a8e.css",
+    "static/js/main.1692c285.js"
+  ]
+}
